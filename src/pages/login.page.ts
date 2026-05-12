@@ -2,15 +2,12 @@ import { type Locator, type Page } from '@playwright/test'
 import { BasePage } from './base.page'
 
 export class LoginPage extends BasePage {
-  private readonly usernameInput: Locator
-  private readonly passwordInput: Locator
-  private readonly loginButton: Locator
+  private readonly usernameInput: Locator = this.page.getByRole('textbox', { name: 'Username' })
+  private readonly passwordInput: Locator = this.page.getByRole('textbox', { name: 'Password' })
+  private readonly loginButton: Locator = this.page.getByRole('button', { name: 'Login' })
 
   constructor(page: Page) {
     super(page, '/web/index.php/auth/login')
-    this.usernameInput = page.locator('[name="username"]')
-    this.passwordInput = page.locator('[name="password"]')
-    this.loginButton = page.locator('.orangehrm-login-button')
   }
 
   async doLogin(username: string, password: string) {
